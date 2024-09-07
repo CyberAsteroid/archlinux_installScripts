@@ -1,35 +1,4 @@
 #!/usr/bin/env bash
-# wifi也最好自己手动连接
-iwctl << EOF
-station wlan0 scan
-station wlan0 connect 这里是你的wifi名字
-这一行替换成你的wifi密码
-exit
-EOF
-# 分区部分最好自己手动来
-fdisk /dev/sda << EOF
-g
-n
-
-
-+300M
-n
-
-
-+8G
-n
-
-
-
-t
-1
-01
-p
-w
-EOF
-
-# 安装部分
-
 echo "Server = https://mirrors.ustc.edu.cn/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel linux linux-firmware networkmanager iwd intel-ucode vim fish
 genfstab -U /mnt >> /mnt/etc/fstab
